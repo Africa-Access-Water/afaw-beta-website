@@ -1,5 +1,5 @@
 // Auto-generated from API - Do not edit manually
-// Last updated: 2025-08-20 16:23:47 UTC
+// Last updated: 2025-08-24 03:12:11 UTC
 
 export const teamMembers = 
 [
