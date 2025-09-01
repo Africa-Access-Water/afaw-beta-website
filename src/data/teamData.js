@@ -1,8 +1,20 @@
 // Auto-generated from API - Do not edit manually
-// Last updated: 2025-08-20 16:23:47 UTC
+// Last updated: 2025-09-01 03:13:42 UTC
 
 export const teamMembers = 
 [
+  {
+    "id": 17,
+    "type": "Volunteer",
+    "full_name": "Matthew Murphy",
+    "title": null,
+    "socials": "",
+    "position": "Fundraising Officer",
+    "image_url": "https://res.cloudinary.com/dz3tgvaiw/image/upload/v1756209209/teams/1756209209130-Copy%20of%20MM%20-%20Matthew%20Murphy.jpg.jpg",
+    "bio": "",
+    "created_at": "2025-08-26T11:53:30.121Z",
+    "updated_at": "2025-08-26T11:53:30.121Z"
+  },
   {
     "id": 15,
     "type": "Volunteer",
@@ -130,7 +142,7 @@ export const teamMembers =
     "title": null,
     "socials": "",
     "position": "Co-Founder & Chief Executive Officer",
-    "image_url": "https://res.cloudinary.com/dz3tgvaiw/image/upload/v1755705299/teams/1755705298719-Rodney%20Katongo.jpg.png",
+    "image_url": "https://res.cloudinary.com/dz3tgvaiw/image/upload/v1756209118/teams/1756209118109-WhatsApp%20Image%202025-08-21%20at%2016.07.30.jpeg.jpg",
     "bio": "",
     "created_at": "2025-08-20T15:55:00.081Z",
     "updated_at": "2025-08-20T15:55:00.081Z"
