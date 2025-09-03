@@ -44,7 +44,7 @@ const Navbar = () => {
                     />
                 </Link>
                 <div className="me-4">
-                <a className="btn btn-primary btn-outline-primary btn-sm py-1 px-2 d-lg-none me-2" href="donate.html" style={{ whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center' }}>
+                <a className="btn btn-primary btn-outline-primary btn-sm py-1 px-2 d-lg-none me-2" href="/donate" style={{ whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center' }}>
                     Donate
                     <div className="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-1" style={{ width: 22, height: 22, fontSize: 14 }}>
                         <i className="fa fa-arrow-right"></i>
