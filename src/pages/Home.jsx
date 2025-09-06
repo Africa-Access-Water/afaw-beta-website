@@ -37,7 +37,7 @@ function Home() {
                       desc:
                         "We build solar-powered water infrastructure to improve food security, income, and climate resilience across rural Africa.",
                       buttonText: "Donate Now",
-                      buttonLink: "donate.html",
+                      buttonLink: "/donate",
                     },
                     {
                       img: "img/about.jpg",
@@ -46,7 +46,7 @@ function Home() {
                       desc:
                         "Join us in empowering women, youth, and farmers with clean water for agriculture and economic independence.",
                       buttonText: "Donate Now",
-                      buttonLink: "donate.html",
+                      buttonLink: "/donate",
                     },
                   ]}
                 />
