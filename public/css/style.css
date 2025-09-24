@@ -656,3 +656,24 @@
 }
 
 
+.main-slider-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.thumbnail-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  &.active {
+    border-color: #0d6efd; 
+    transform: scale(1.1);
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
