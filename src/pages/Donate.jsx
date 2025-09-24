@@ -7,7 +7,7 @@ const Donate = () => {
   // API Configuration - Switch between environments
   const PRODUCTION_API_BASE = "https://afaw-beta-api.onrender.com/api";
   const LOCAL_API_BASE = "http://localhost:5000/api";
-  const API_BASE = LOCAL_API_BASE; // Change to LOCAL_API_BASE for local dev
+  const API_BASE = PRODUCTION_API_BASE; // Change to LOCAL_API_BASE for local dev
 
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
