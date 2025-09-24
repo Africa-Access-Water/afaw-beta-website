@@ -9,11 +9,32 @@ const Donate = () => {
   const LOCAL_API_BASE = "http://localhost:5000/api";
   const API_BASE = PRODUCTION_API_BASE; // Change to LOCAL_API_BASE for local dev
 
+  const [projects, setProjects] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
   const [showCustom, setShowCustom] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [donationType, setDonationType] = useState(""); // track one_time vs recurring
+
+
+   useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/projects`);
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          setProjects(data);
+        } else {
+          console.warn("No projects returned from API");
+        }
+      } catch (err) {
+        console.error("Error fetching projects:", err);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
@@ -156,19 +177,17 @@ const Donate = () => {
                       />
                     </div>
 
+                    {/* Project Dropdown - dynamically populated */}
                     <div className="form-group mb-3">
-                        <select
-                          name="project_id"
-                          className="form-control"
-                          defaultValue="1"
-                          required
-                        >
-                          <option value="1">Select a Project</option>
-                          <option value="1">General Donation</option>
-                          <option value="2">Solar-Powered Water Infrastructure</option>
-                          <option value="3">Irrigated Plots for Rural Women</option>
-                        </select>
-                      </div>
+                      <select name="project_id" className="form-control" required defaultValue="">
+                        <option value="" disabled>Select a Project</option>
+                        {projects.map((project) => (
+                          <option key={project.id} value={project.id}>
+                            {project.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
                     {/* Donation Type + Currency */}
                     <div className="form-group row mb-3">
