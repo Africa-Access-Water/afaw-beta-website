@@ -5,8 +5,8 @@ on:
     types: [update-projects-data]
   workflow_dispatch:
   schedule:
-    # Run daily at 3 AM UTC
-    - cron: '0 3 * * *'
+    # Run daily at 2:30 AM UTC to keep data fresh
+    - cron: '30 2 * * *'
 
 permissions:
   contents: write
@@ -15,7 +15,7 @@ permissions:
 jobs:
   update-projects-data:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,25 +32,33 @@ jobs:
         run: |
           echo "Fetching projects data from API..."
           
+          # Fetch data with timeout
           response=$(curl -s -w "%{http_code}" -o projectsData.json --max-time 30 https://afaw-beta-api.onrender.com/api/projects)
           http_code="${response: -3}"
-          
+
+          echo "HTTP code: $http_code"
+          cat projectsData.json
+
           if [ "$http_code" != "200" ]; then
             echo "❌ API request failed with status code: $http_code"
             exit 1
           fi
-          
+
+          # Validate JSON
           if ! jq empty projectsData.json 2>/dev/null; then
             echo "❌ Invalid JSON response from API"
             exit 1
           fi
-          
+
+          # Check array length
           array_length=$(jq length projectsData.json)
+          echo "Array length: $array_length"
+
           if [ "$array_length" -eq 0 ]; then
             echo "❌ API returned empty projects data"
             exit 1
           fi
-          
+
           echo "✅ Successfully fetched $array_length projects"
           echo "data_count=$array_length" >> $GITHUB_OUTPUT
 
@@ -59,15 +67,14 @@ jobs:
           echo "Converting JSON to JavaScript module..."
           
           cat > src/data/projectsData.js << EOF
-          // Auto-generated from API - Do not edit manually
-          // Last updated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          
-          export const projects = 
-          EOF
+// Auto-generated from API - Do not edit manually
+// Last updated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+export const projects = 
+EOF
           
           jq '.' projectsData.json >> src/data/projectsData.js
           echo ";" >> src/data/projectsData.js
-          
           echo "✅ JavaScript file generated successfully"
 
       - name: Check for changes
@@ -122,7 +129,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: pulls[0].number,
-                body: `✅ Projects data has been updated successfully!\n\n**Summary:**\n- Projects: ${{ steps.fetch-data.outputs.data_count }}\n- Last API fetch: ${new Date().toISOString()}`
+                body: `✅ Projects data has been updated successfully!\n\n**Summary:**\n- Projects count: ${{ steps.fetch-data.outputs.data_count }}\n- Last API fetch: ${new Date().toISOString()}`
               });
             }
 
