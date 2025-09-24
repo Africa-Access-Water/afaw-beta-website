@@ -6,8 +6,8 @@ import Header from "../components/Header";
 const Donate = () => {
   // API Configuration - Switch between environments
   const PRODUCTION_API_BASE = "https://afaw-beta-api.onrender.com/api";
-  // const LOCAL_API_BASE = "http://localhost:3001/api";
-  const API_BASE = PRODUCTION_API_BASE; // Change to LOCAL_API_BASE for local dev
+  const LOCAL_API_BASE = "http://localhost:5000/api";
+  const API_BASE = LOCAL_API_BASE; // Change to LOCAL_API_BASE for local dev
 
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
@@ -32,6 +32,8 @@ const Donate = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
 
+    console.log("Form Data:", data);
+
     // choose API endpoint
     const endpoint =
       data.donation_type === "recurring"
@@ -45,11 +47,12 @@ const Donate = () => {
         body: JSON.stringify({
           name: data.donor_name,
           email: data.donor_email,
+          project_id: data.project_id,
           amount: showCustom ? customAmount : selectedAmount,
           currency: data.currency,
           donation_type: data.donation_type,      // <-- add this
           interval: data.interval,
-          recurring: data.donation_type === data.interval, // boolean flag
+          recurring: data.donation_type === "recurring",
         }),
       });
 
@@ -152,6 +155,20 @@ const Donate = () => {
                         required
                       />
                     </div>
+
+                    <div className="form-group mb-3">
+                        <select
+                          name="project_id"
+                          className="form-control"
+                          defaultValue="1"
+                          required
+                        >
+                          <option value="1">Select a Project</option>
+                          <option value="1">General Donation</option>
+                          <option value="2">Solar-Powered Water Infrastructure</option>
+                          <option value="3">Irrigated Plots for Rural Women</option>
+                        </select>
+                      </div>
 
                     {/* Donation Type + Currency */}
                     <div className="form-group row mb-3">
