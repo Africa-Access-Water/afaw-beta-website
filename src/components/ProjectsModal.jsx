@@ -1,25 +1,39 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/ProjectsModal.css';
 
 const ProjectsModal = ({ project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const nextImage = useCallback(() => {
+    if (project && project.media.length > 1) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === project.media.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  }, [project]);
+
+  const prevImage = () => {
+    if (project) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? project.media.length - 1 : prevIndex - 1
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (project && project.media.length > 1) {
+      const interval = setInterval(() => {
+        nextImage();
+      }, 3000); // Change image
+
+      return () => clearInterval(interval);
+    }
+  }, [currentImageIndex, nextImage, project]);
+
   if (!project) {
     return null;
   }
-
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === project.media.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? project.media.length - 1 : prevIndex - 1
-    );
-  };
 
   const donationProgress =
     (parseFloat(project.donation_raised) / parseFloat(project.donation_goal)) * 100;
