@@ -10,8 +10,18 @@ import Stat from '../components/Stat';
 import Cause from '../components/Cause';
 import About from '../components/About';
 import Objectives from "../components/Objectives";
+import ProjectsModal from "../components/ProjectsModal";
+import { useProjects } from "../hooks/useProjects";
 
 function Home() {
+    const { projectsData, loading, error } = useProjects(); // Custom hook to fetch projects data
+    const [selectedProject, setSelectedProject] = React.useState(null);
+    const openModal = (project) => {
+        setSelectedProject(project);
+    };
+    const closeModal = () => {
+        setSelectedProject(null);
+    };
     return (
         <>
             <Helmet>
@@ -87,11 +97,18 @@ function Home() {
                         </div>
                         <div className="row g-4 justify-content-center">
                             {causes.map((cause, index) => (
-                                <Cause key={index} {...cause} />
+                                <Cause key={index} {...cause} onCauseClick={(id) => openModal(causes.find(cause => cause.id === id))}/>
                             ))}
                         </div>
                     </div>
                 </div>
+
+                {selectedProject && (
+                    <ProjectsModal
+                        project={selectedProject}
+                        onClose={closeModal}
+                    />
+                )}
             </Layout>
         </>
     );
