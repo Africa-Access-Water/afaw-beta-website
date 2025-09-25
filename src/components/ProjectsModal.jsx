@@ -52,7 +52,7 @@ const ProjectsModal = ({ project, onClose }) => {
             <div className="donation-progress">
               <div
                 className="progress-bar"
-                style={{ width: `${donationProgress}%` }}
+                style={{ width: `${donationProgress < 100 ? donationProgress : 100}%` }}
               ></div>
             </div>
             <div className="donation-info">
