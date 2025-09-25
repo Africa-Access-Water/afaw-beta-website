@@ -5,13 +5,36 @@ import Layout from "../components/Layout";
 import Carousel from "../components/Carousel";
 import VisionMission from "../components/VisionMission ";
 
-import { causes } from '../data/causesData';
+import { causes as causesData } from '../data/causesData';
 import Stat from '../components/Stat';
 import Cause from '../components/Cause';
 import About from '../components/About';
 import Objectives from "../components/Objectives";
+import ProjectsModal from "../components/ProjectsModal";
+import { useProjects } from "../hooks/useProjects";
 
 function Home() {
+    const { projectsData, projectsLoading, projectsError } = useProjects();
+    const [selectedProject, setSelectedProject] = React.useState(null);
+
+    // Decide which causes to show
+    const causes = React.useMemo(() => {
+        if (projectsLoading) {
+            return Array(3).fill({ loading: true });
+        }
+        if (projectsError || projectsData.length === 0) {
+            return causesData;
+        }
+        return projectsData;
+    }, [projectsLoading, projectsError, projectsData]);
+
+    const openModal = React.useCallback((project) => {
+        setSelectedProject(project);
+    }, []);
+
+    const closeModal = React.useCallback(() => {
+        setSelectedProject(null);
+    }, []);
     return (
         <>
             <Helmet>
@@ -87,11 +110,18 @@ function Home() {
                         </div>
                         <div className="row g-4 justify-content-center">
                             {causes.map((cause, index) => (
-                                <Cause key={index} {...cause} />
+                                <Cause key={index} {...cause} onCauseClick={(id) => openModal(causes.find(cause => cause.id === id))}/>
                             ))}
                         </div>
                     </div>
                 </div>
+
+                {selectedProject && (
+                    <ProjectsModal
+                        project={selectedProject}
+                        onClose={closeModal}
+                    />
+                )}
             </Layout>
         </>
     );
