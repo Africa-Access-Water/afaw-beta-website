@@ -6,7 +6,7 @@ import ShareButton from "../components/ShareButton";
 
 const PRODUCTION_API_BASE = "https://afaw-beta-api.onrender.com/api";
 const LOCAL_API_BASE = "http://localhost:5000/api";
-const API_BASE = LOCAL_API_BASE;
+const API_BASE = PRODUCTION_API_BASE;
 
 const SuccessPage = () => {
   const [searchParams] = useSearchParams();
