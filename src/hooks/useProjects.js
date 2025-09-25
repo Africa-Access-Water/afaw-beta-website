@@ -3,8 +3,8 @@ import { getProjects } from '../data/api/projects';
 
 export const useProjects = () => {
   const [projectsData, setProjectsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [projectsLoading, setProjectsLoading] = useState(true);
+  const [projectsError, setProjectsError] = useState(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -12,14 +12,14 @@ export const useProjects = () => {
         const data = await getProjects();
         setProjectsData(data);
       } catch (err) {
-        setError(err);
+        setProjectsError(err);
       } finally {
-        setLoading(false);
+        setProjectsLoading(false);
       }
     };
 
     fetchProjects();
   }, []);
 
-  return { projectsData, loading, error };
+  return { projectsData, projectsLoading, projectsError };
 };
