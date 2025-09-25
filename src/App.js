@@ -18,8 +18,8 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/posts" element={<Posts />} />
         {/* <Route path="*" element={<Home />} /> */}
-        <Route path="/success" element={<SuccessPage />} />
-        <Route path="/failure" element={<FailurePage />} />
+        <Route path="/donation/success" element={<SuccessPage />} />
+        <Route path="/donation/failure" element={<FailurePage />} />
         <Route path="*" element={<NotFound />} />
                 
       </Routes>

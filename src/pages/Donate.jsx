@@ -7,7 +7,7 @@ import Header from "../components/Header";
 const Donate = () => {
   const PRODUCTION_API_BASE = "https://afaw-beta-api.onrender.com/api";
   const LOCAL_API_BASE = "http://localhost:5000/api";
-  const API_BASE = PRODUCTION_API_BASE;
+  const API_BASE = LOCAL_API_BASE;
 
   const [projects, setProjects] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState("1");
