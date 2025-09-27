@@ -6,6 +6,7 @@ import Team from "./pages/Team";
 import Posts from "./pages/Posts";
 import SuccessPage from "./pages/SuccessPage";
 import FailurePage from "./pages/FailurePage";
+import WorkInProgress from "./pages/WorkInProgress";
 import NotFound from "./pages/404";
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<WorkInProgress />} />
+        <Route path="/our-work" element={<WorkInProgress />} />
+        <Route path="/blogs" element={<WorkInProgress />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/team" element={<Team />} />
@@ -20,6 +24,7 @@ function App() {
         {/* <Route path="*" element={<Home />} /> */}
         <Route path="/donation/success" element={<SuccessPage />} />
         <Route path="/donation/failure" element={<FailurePage />} />
+
         <Route path="*" element={<NotFound />} />
                 
       </Routes>
