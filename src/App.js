@@ -8,14 +8,17 @@ import SuccessPage from "./pages/SuccessPage";
 import FailurePage from "./pages/FailurePage";
 import WorkInProgress from "./pages/WorkInProgress";
 import NotFound from "./pages/404";
+import Projects from "./pages/Projects";
+import AboutPage from "./pages/AboutPage";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<WorkInProgress />} />
-        <Route path="/our-work" element={<WorkInProgress />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/our-work" element={<Projects />} />
         <Route path="/blogs" element={<WorkInProgress />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/contact" element={<Contact />} />
