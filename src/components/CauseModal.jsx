@@ -22,7 +22,7 @@ const CauseModal = ({
   const donationProgress = Math.round((donation_raised / donation_goal) * 100);
 
   return (
-    <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }} tabIndex="-1" onClick={onClose}>
+    <div className="modal fade show cause-modal-wrapper" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }} tabIndex="-1" onClick={onClose}>
       <div className="modal-dialog modal-xl modal-dialog-centered" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content">
           <div className="modal-header">
