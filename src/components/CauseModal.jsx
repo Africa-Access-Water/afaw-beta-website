@@ -32,7 +32,7 @@ const CauseModal = ({
           <div className="modal-body">
             <div className="row">
               {/* Left Column: Details */}
-              <div className="col-lg-6">
+              <div className="col-lg-6 mb-4 mb-lg-0">
                 <div className="d-inline-block bg-primary text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
                   <small>{category}</small>
                 </div>
@@ -60,11 +60,19 @@ const CauseModal = ({
                   </div>
                 </div>
 
-                {pdf_document && (
-                  <a href={pdf_document} target="_blank" rel="noopener noreferrer" className="btn btn-secondary mb-3">
-                    View Project PDF
-                  </a>
-                )}
+                <div className="d-flex flex-wrap gap-2">
+                  {pdf_document && (
+                    <a href={pdf_document} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                      View Project PDF
+                    </a>
+                  )}
+                  <Link to="/donate" className="btn btn-primary py-2 px-3">
+                    Donate Now
+                    <div className="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                      <i className="fa fa-arrow-right"></i>
+                    </div>
+                  </Link>
+                </div>
               </div>
 
               {/* Right Column: Image Carousel */}
@@ -91,9 +99,6 @@ const CauseModal = ({
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
-            <Link to="/donate" className="btn btn-primary">
-              Donate Now
-            </Link>
           </div>
         </div>
       </div>
