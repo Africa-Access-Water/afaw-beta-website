@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CauseModal from './CauseModal';
 
-const Cause = ({ name, description, donation_goal, donation_raised, category, cover_image, pdf_document }) => {
+const Cause = ({ name, description, donation_goal, donation_raised, category, cover_image, pdf_document, media }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => setShowModal(true);
@@ -62,7 +62,18 @@ const Cause = ({ name, description, donation_goal, donation_raised, category, co
         </div>
       </div>
 
-      <CauseModal show={showModal} onClose={handleCloseModal} />
+      <CauseModal
+        show={showModal}
+        onClose={handleCloseModal}
+        name={name}
+        description={description}
+        donation_goal={donation_goal}
+        donation_raised={donation_raised}
+        category={category}
+        cover_image={cover_image}
+        media={media}
+        pdf_document={pdf_document}
+      />
     </>
   );
 };

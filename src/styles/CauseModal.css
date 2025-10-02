@@ -1,0 +1,9 @@
+.modal-image {
+  height: 400px; /* Or adjust to your preference */
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.modal-xl {
+    max-width: 90%;
+}
