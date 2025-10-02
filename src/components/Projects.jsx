@@ -1,8 +1,22 @@
+import { useEffect, useState } from 'react';
 import Cause from './Cause';
-import { causes } from '../data/causesData';
+import { causes as fallbackCauses } from '../data/causesData';
+import { useProjects } from '../hooks/useProjects';
 
 export default function Projects() {
-    
+    const { projects, projectsLoading, projectsError } = useProjects();
+    const [displayData, setDisplayData] = useState([]);
+
+    useEffect(() => {
+        if (!projectsLoading) {
+            if (projectsError || !projects || projects.length === 0) {
+                setDisplayData(fallbackCauses);
+            } else {
+                setDisplayData(projects);
+            }
+        }
+    }, [projects, projectsLoading, projectsError]);
+
     return (
         <div className="container-xxl bg-light my-5 py-5">
             <div className="container py-5">
@@ -11,9 +25,13 @@ export default function Projects() {
                     <h1 className="display-6 mb-4">Together, We Build Resilience Through Clean Water and Opportunity</h1>
                 </div>
                 <div className="row g-4 justify-content-center">
-                    {causes.map((cause, index) => (
-                        <Cause key={index} {...cause} />
-                    ))}
+                    {projectsLoading ? (
+                        <p>Loading projects...</p>
+                    ) : (
+                        displayData.map((cause) => (
+                            <Cause key={cause.id} {...cause} />
+                        ))
+                    )}
                 </div>
             </div>
         </div>
